@@ -15,36 +15,36 @@ datasource db {
 }
 
 model Client {
-  id Int @id @default(autoincrement())
-  firstName String
-  lastName String
-  email String @unique
-  phone Int
-  notes String
-  appointments Appointment[] 
+  id           Int           @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  email        String        @unique
+  phone        String
+  notes        String
+  appointments Appointment[]
 }
 
 model Service {
-  id Int @id @default(autoincrement())
-  name String
-  description String
-  price Int
-  duration Int
-  image String
-  appointmentServices AppointmentServices[]
+  id                  Int                   @id @default(autoincrement())
+  name                String                @unique
+  description         String
+  price               Int
+  duration            Int
+  image               String
+  AppointmentServices AppointmentServices[]
 }
 
 model Appointment {
-  id Int @id @default(autoincrement())
-  date_time DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  duration Int
-  price Int
-  client Client @relation(fields: [clientId], references: [id])
-  clientId Int
-  status Status @default(Requested)
-  appointmentServices AppointmentServices[]
+  id                  Int                   @id @default(autoincrement())
+  date_time           DateTime
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  duration            Int
+  price               Int
+  client              Client                @relation(fields: [clientId], references: [id])
+  clientId            Int
+  status              Status                @default(Requested)
+  AppointmentServices AppointmentServices[]
 }
 
 model AppointmentServices {

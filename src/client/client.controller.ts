@@ -8,13 +8,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
+import { Prisma } from '@prisma/client';
 
 @Controller('clients')
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Post()
-  create(@Body() createClientDto: string) {
+  create(@Body() createClientDto: Prisma.ClientCreateInput) {
     return this.clientService.create(createClientDto);
   }
 
@@ -29,7 +30,10 @@ export class ClientController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClientDto: string) {
+  update(
+    @Param('id') id: string,
+    @Body() updateClientDto: Prisma.ClientUpdateInput,
+  ) {
     return this.clientService.update(+id, updateClientDto);
   }
 
